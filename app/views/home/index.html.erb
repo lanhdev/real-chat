@@ -1,1 +1,24 @@
-<h1>Home</h1>
+<div class="ui container">
+
+  <h1 class="ui header">Home</h1>
+  <p>Choose your room</p>
+
+  <div class="ui large relaxed divided list">
+    <% @rooms.each do |room| %>
+      <div class="item">
+        <i class="talk icon"></i>
+        <div class="content"><a href="<%= room_path(id: room.id) %>" class="header"><%= room.name %></a></div>
+      </div>
+    <% end %>
+  </div>
+
+  <%= form_for @room do |f| %>
+    <div class="ui form">
+      <div class="fields">
+        <%= f.text_field :name, placeholder: 'New Room Name' %>
+        <%= f.submit "Create", class: 'ui green button' %>
+      </div>
+    </div>
+  <% end %>
+
+</div>
