@@ -1,0 +1,24 @@
+<div class="ui container">
+  <h1 class="ui header">Room: <%= @room.name %></h1>
+
+  <div class="ui large relaxed list">
+    <% @messages.each do |message| %>
+      <div class="ui item">
+        <div class="content">
+          <div class="ui compact mini blue message"><%= message.body %></div>
+          <div class="ui left pointing label"><%= message.username %></div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <%= form_for [@room, Message.new] do |f| -%>
+    <div class="ui large form">
+      <div class="fields">
+        <div class="nine wide field"><%= f.text_field :body, placeholder: 'Your message', required: true %></div>
+        <div class="three wide field"><%= f.text_field :username, placeholder: 'Your name', required: true %></div>
+        <%= f.submit "Send", class: 'ui green button' %>
+      </div>
+    </div>
+  <% end %>
+</div>
