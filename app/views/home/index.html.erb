@@ -16,7 +16,11 @@
     <div class="ui form">
       <div class="fields">
         <div class="field"><%= f.text_field :name, placeholder: 'New Room Name' %></div>
-        <%= f.submit "Create", class: 'ui green button' %>
+        <%= f.fields_for :messages do |message_form| %>
+          <div class="field"><%= message_form.text_field :username, placeholder: 'Your name', required: true %></div>
+          <div class="field"><%= message_form.text_field :body, placeholder: 'Your first message', required: true %></div>
+          <%= f.submit "Create", class: 'ui green button' %>
+        <% end %>
       </div>
     </div>
   <% end %>

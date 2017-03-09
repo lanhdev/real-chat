@@ -5,14 +5,14 @@
     <% @messages.each do |message| %>
       <div class="ui item">
         <div class="content">
+          <div class="ui blue label"><%= message.username %></div>
           <div class="ui compact mini blue message"><%= message.body %></div>
-          <div class="ui left pointing label"><%= message.username %></div>
         </div>
       </div>
     <% end %>
   </div>
 
-  <%= form_for [@room, Message.new] do |f| -%>
+  <%= form_for [@room, Message.new(username: current_user)] do |f| -%>
     <div class="ui large form">
       <div class="fields">
         <div class="nine wide field"><%= f.text_field :body, placeholder: 'Your message', required: true %></div>

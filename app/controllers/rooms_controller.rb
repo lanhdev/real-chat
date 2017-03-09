@@ -7,6 +7,9 @@ class RoomsController < ApplicationController
   def create
     @room = Room.new room_params
     if @room.save
+      if message = @room.messages.first
+        session[:username] = message.username
+      end
       flash[:success] = 'Created room successfully'
       redirect_to @room
     else
@@ -17,6 +20,6 @@ class RoomsController < ApplicationController
 
   private
     def room_params
-      params.require(:room).permit(:name)
+      params.require(:room).permit(:name, :messages_attributes => [:username, :body])
     end
 end
