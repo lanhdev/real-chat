@@ -1,15 +1,8 @@
 <div class="ui container">
   <h1 class="ui header">Room: <%= @room.name %></h1>
 
-  <div class="ui large relaxed list">
-    <% @messages.each do |message| %>
-      <div class="ui item">
-        <div class="content">
-          <div class="ui blue label"><%= message.username %></div>
-          <div class="ui compact mini blue message"><%= message.body %></div>
-        </div>
-      </div>
-    <% end %>
+  <div class="update_messages ui large relaxed list">
+    <%= render @messages %>
   </div>
 
   <%= form_for [@room, Message.new(username: current_user)] do |f| -%>
@@ -22,3 +15,12 @@
     </div>
   <% end %>
 </div>
+
+<script type="text/javascript">
+  function reload() {
+    $.get("<%= room_messages_path(@room, format: :js) %>", function(response) {
+      console.log("Run successfully")
+    })
+  }
+  setInterval(reload, 3000)
+</script>
