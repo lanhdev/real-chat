@@ -1,18 +1,20 @@
-<div class="ui large blue inverted menu">
+<div class="ui large teal  inverted borderless menu" style="border-radius:0!important"> 
   <a class="ui active item" href=<%= root_path %> >RealChat</a>
     <div class="right menu">
     <% if current_user %>
       <a class="ui active item"><%= current_user %></a>
       <%= link_to "Sign Out", sign_out_path, method: 'delete', class: 'ui item' %>
     <% else %>
-      <%= form_tag sign_in_path do %>
-        <div class="ui form">
-          <div class="fields">
-            <div class="field"><%= text_field_tag :username, nil, placeholder: 'Username' %></div>
-            <%= submit_tag 'Log in', class: 'ui button' %>
+      <div class="item">
+        <%= form_tag sign_in_path do %>
+          <div class="ui mini form">
+            <div class="fields" style="margin-bottom:0!important">
+              <div class="field"><%= text_field_tag :username, params[:username], placeholder: 'Username' %></div>
+              <%= submit_tag 'Sign in', class: 'ui mini yellow button' %>
+            </div>
           </div>
-        </div>
-      <% end %>
+        <% end %>
+      </div>
     <% end %>
   </div>
 </div>
