@@ -5,7 +5,7 @@
     <%= render @messages %>
   </div>
 
-  <%= form_for [@room, Message.new(username: current_user)] do |f| -%>
+  <%= form_for [@room, Message.new(username: current_user)], remote: true do |f| -%>
     <div class="ui large form">
       <div class="fields">
         <div class="nine wide field"><%= f.text_field :body, placeholder: 'Your message', required: true %></div>
@@ -22,5 +22,11 @@
       console.log("Run successfully")
     })
   }
-  setInterval(reload, 3000)
+
+  function reloadJSON() {
+    $.getJSON("<%= room_messages_path(@room, format: :json) %>", function(response) {
+      console.log("data", response)
+    })
+  }
+  // setInterval(reload, 3000) --> rails help to do this ???
 </script>
